@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 ![App Brewery Banner](Documentation/AppBreweryBanner.png)
 
@@ -21,4 +21,3 @@ We’re going to make a Bitcoin price ticker. The app will give you the latest B
 IOS app, Cocoapods, REST, APIs - Build a Bitcoin Price Tracker
 
 Bitcoin price ticker. The app will give you the latest Bitcoin prices in all the popular, traded currencies, so you can track how well your Bitcoin investments are doing on the go.
->>>>>>> 5ae65b49a3fdd280148b6950bf246cc476b35cde
