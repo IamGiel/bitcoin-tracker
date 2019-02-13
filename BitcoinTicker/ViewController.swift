@@ -14,11 +14,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     let baseURL = "https://apiv2.bitcoinaverage.com/indices/global/ticker/BTC"
     let currencyArray = ["AUD", "BRL","CAD","CNY","EUR","GBP","HKD","IDR","ILS","INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK","SGD","USD","ZAR"]
+    let currencySymbol = ["$", "R$", "$", "¥", "€", "£", "$", "Rp", "₪", "₹", "¥", "$", "kr", "$", "zł", "lei", "₽", "kr", "$", "$", "R"];
     var finalURL = ""
+    var finalSymbol = ""
 
     //Pre-setup IBOutlets
     @IBOutlet weak var bitcoinPriceLabel: UILabel!
     @IBOutlet weak var currencyPicker: UIPickerView!
+ 
     
 
     
@@ -44,6 +47,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print(currencyArray[row])
     // return row;
+        finalSymbol = currencySymbol[row];
         let chosenCurrency = currencyArray[row];
         finalURL = baseURL + chosenCurrency;
         print(finalURL)
@@ -70,7 +74,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                     let bitcoinJSON : JSON = JSON(response.result.value!)
                     print(bitcoinJSON)
 
-                    self.updateBitcoinData(json: bitcoinJSON)
+                    self.updateBitcoinData(json: bitcoinJSON, symbol: self.finalSymbol )
 
                 } else {
                     print("Error: \(String(describing: response.result.error))")
@@ -87,8 +91,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 //    //MARK: - JSON Parsing
 //    /***************************************************************/
 //    
-    func updateBitcoinData(json : JSON) {
+    func updateBitcoinData(json : JSON, symbol: String) {
         print("this is JSON ", json)
+        bitcoinPriceLabel.text = String("\(symbol) \(json["ask"])");
     }
 
 
